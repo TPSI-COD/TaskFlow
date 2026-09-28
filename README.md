@@ -158,23 +158,23 @@ O TaskFlow possui uma interface responsiva desenvolvida com Bootstrap.
 
 ### Login
 
-![Tela de Login](docs/screenshots/login.png)
+![Tela de Login](docs/Screenshots/login.png)
 
 ### Tela de Home
 
-![Tela de Home](docs/screenshots/home.png)
+![Tela de Home](docs/Screenshots/home.png)
 
 ### Dashboard
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/Screenshots/dashboard.png)
 
 ### Gerenciamento de tarefas
 
-![Gerenciamento de tarefas](docs/screenshots/tarefas.png)
+![Gerenciamento de tarefas](docs/Screenshots/tarefas.png)
 
 ### Kanban
 
-![Kanban](docs/screenshots/kanban.png)
+![Kanban](docs/Screenshots/kanban.png)
 
 ## Próximos passos
 
