@@ -39,7 +39,7 @@ O projeto foi desenvolvido como parte do meu processo de aprendizado e prática 
 
 ## Estrutura do projeto
 
-```text
+
 TaskFlow/
 ├── Controllers/
 ├── Data/
@@ -52,7 +52,7 @@ TaskFlow/
 ├── Program.cs
 ├── appsettings.json
 └── TaskFlow.csproj
-```
+
 
 ## Autenticação
 
@@ -68,9 +68,9 @@ O TaskFlow possui uma API REST integrada à aplicação para atualização do st
 
 Endpoint utilizado pelo Kanban:
 
-```http
+http
 PUT /api/tarefas/{id}/status
-```
+
 
 A API valida o usuário autenticado, verifica a tarefa e atualiza seu status.
 
@@ -154,14 +154,27 @@ A aplicação estará disponível no endereço informado pelo terminal.
 
 ## Interface
 
-O TaskFlow possui uma interface responsiva desenvolvida com Bootstrap, com páginas para:
+O TaskFlow possui uma interface responsiva desenvolvida com Bootstrap.
 
-* Login
-* Cadastro
-* Dashboard
-* Gerenciamento de tarefas
-* Kanban
-* Criação e edição de tarefas
+### Login
+
+![Tela de Login](docs/screenshots/login.png)
+
+### Tela de Home
+
+![Tela de Home](docs/screenshots/home.png)
+
+### Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Gerenciamento de tarefas
+
+![Gerenciamento de tarefas](docs/screenshots/tarefas.png)
+
+### Kanban
+
+![Kanban](docs/screenshots/kanban.png)
 
 ## Próximos passos
 
