@@ -1,0 +1,264 @@
+@model List<TaskFlow.Models.Tarefa>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+<div>
+    <h2 class="mb-1">Minhas Tarefas</h2>
+
+    <p class="text-muted mb-0">
+        Gerencie e acompanhe suas tarefas.
+    </p>
+</div>
+
+<div class="d-flex gap-2">
+
+    <a asp-action="Kanban"
+       class="btn btn-outline-dark">
+        Kanban
+    </a>
+
+    <a asp-action="Criar"
+       class="btn btn-primary">
+        + Nova Tarefa
+    </a>
+
+</div>
+
+
+</div>
+
+<!-- Filtros -->
+
+<div class="d-flex align-items-center gap-2 flex-wrap mb-4">
+
+
+<span class="text-muted me-2">
+    Filtrar:
+</span>
+
+<a asp-action="Index"
+   class="btn btn-sm btn-outline-secondary">
+    Todas
+</a>
+
+<a asp-action="Index"
+   asp-route-status="Pendente"
+   class="btn btn-sm btn-outline-secondary">
+    Pendentes
+</a>
+
+<a asp-action="Index"
+   asp-route-status="Em Andamento"
+   class="btn btn-sm btn-outline-secondary">
+    Em Andamento
+</a>
+
+<a asp-action="Index"
+   asp-route-status="Concluída"
+   class="btn btn-sm btn-outline-secondary">
+    Concluídas
+</a>
+
+
+</div>
+
+<!-- Lista de tarefas -->
+
+<div class="table-responsive">
+
+
+<table class="table table-hover align-middle">
+
+    <thead>
+
+        <tr>
+
+            <th>
+                Título
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Prioridade
+            </th>
+
+            <th>
+                Criada em
+            </th>
+
+            <th class="text-end">
+                Ações
+            </th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+    @foreach (var tarefa in Model)
+    {
+        <tr>
+
+            <!-- Título -->
+
+            <td>
+
+                <div>
+                    <strong>
+                        @tarefa.Titulo
+                    </strong>
+                </div>
+
+                @if (!string.IsNullOrEmpty(tarefa.Descricao))
+                {
+                    <div class="text-muted small mt-1">
+                        @tarefa.Descricao
+                    </div>
+                }
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+                @if (tarefa.Status == "Pendente")
+                {
+                    <span class="badge bg-secondary">
+                        Pendente
+                    </span>
+                }
+
+                @if (tarefa.Status == "Em Andamento")
+                {
+                    <span class="badge bg-warning text-dark">
+                        Em Andamento
+                    </span>
+                }
+
+                @if (tarefa.Status == "Concluída")
+                {
+                    <span class="badge bg-success">
+                        Concluída
+                    </span>
+                }
+
+            </td>
+
+
+            <!-- Prioridade -->
+
+            <td>
+
+                @if (tarefa.Prioridade == "Alta")
+                {
+                    <span class="badge bg-danger">
+                        Alta
+                    </span>
+                }
+
+                @if (tarefa.Prioridade == "Média")
+                {
+                    <span class="badge bg-warning text-dark">
+                        Média
+                    </span>
+                }
+
+                @if (tarefa.Prioridade == "Baixa")
+                {
+                    <span class="badge bg-secondary">
+                        Baixa
+                    </span>
+                }
+
+            </td>
+
+
+            <!-- Data -->
+
+            <td class="text-muted">
+
+                @tarefa.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+
+            </td>
+
+
+            <!-- Ações -->
+
+            <td>
+
+                <div class="d-flex justify-content-end gap-1 flex-wrap">
+
+                    <a asp-action="Editar"
+                       asp-route-id="@tarefa.Id"
+                       class="btn btn-outline-primary btn-sm">
+                        Editar
+                    </a>
+
+
+                    <form asp-action="Excluir"
+                          asp-route-id="@tarefa.Id"
+                          method="post"
+                          class="d-inline"
+                          onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');">
+
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit"
+                                class="btn btn-outline-danger btn-sm">
+                            Excluir
+                        </button>
+
+                    </form>
+
+
+                    @if (tarefa.Status == "Pendente")
+                    {
+                        <a asp-action="AlterarStatus"
+                           asp-route-id="@tarefa.Id"
+                           asp-route-status="Em Andamento"
+                           class="btn btn-outline-warning btn-sm">
+                            Iniciar
+                        </a>
+                    }
+
+                    @if (tarefa.Status == "Em Andamento")
+                    {
+                        <a asp-action="AlterarStatus"
+                           asp-route-id="@tarefa.Id"
+                           asp-route-status="Concluída"
+                           class="btn btn-outline-success btn-sm">
+                            Concluir
+                        </a>
+                    }
+
+                    @if (tarefa.Status == "Concluída")
+                    {
+                        <a asp-action="AlterarStatus"
+                           asp-route-id="@tarefa.Id"
+                           asp-route-status="Pendente"
+                           class="btn btn-outline-secondary btn-sm">
+                            Reabrir
+                        </a>
+                    }
+
+                </div>
+
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>
+
+
+</div>

@@ -1,0 +1,30 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# User Secrets
+secrets.json
+
+# Configurações locais
+appsettings.Development.json
+
+# Node
+node_modules/
+
+# Publicação
+publish/
+
+# Sistema
+Thumbs.db
+.DS_Store

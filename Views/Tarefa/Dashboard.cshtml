@@ -1,0 +1,146 @@
+@model TaskFlow.Models.ViewModels.DashboardViewModel
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="mb-1">Dashboard</h2>
+
+        <p class="text-muted mb-0">
+            Visão geral das suas tarefas.
+        </p>
+    </div>
+
+    <a asp-action="Criar"
+       class="btn btn-primary">
+        + Nova Tarefa
+    </a>
+
+</div>
+
+
+<div class="row g-4">
+
+    <!-- Total -->
+
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <p class="text-muted mb-2">
+                    Total de tarefas
+                </p>
+
+                <h2 class="mb-0">
+                    @Model.TotalTarefas
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Pendentes -->
+
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <p class="text-muted mb-2">
+                    Pendentes
+                </p>
+
+                <h2 class="mb-0">
+                    @Model.Pendentes
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Em andamento -->
+
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <p class="text-muted mb-2">
+                    Em andamento
+                </p>
+
+                <h2 class="mb-0">
+                    @Model.EmAndamento
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Concluídas -->
+
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <p class="text-muted mb-2">
+                    Concluídas
+                </p>
+
+                <h2 class="mb-0">
+                    @Model.Concluidas
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="card shadow-sm mt-4">
+
+    <div class="card-body">
+
+        <h5 class="mb-3">
+            Acesso rápido
+        </h5>
+
+        <div class="d-flex gap-2 flex-wrap">
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+                Ver tarefas
+            </a>
+
+            <a asp-action="Kanban"
+               class="btn btn-outline-secondary">
+                Abrir Kanban
+            </a>
+
+            <a asp-action="Criar"
+               class="btn btn-primary">
+                Nova tarefa
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

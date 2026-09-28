@@ -1,0 +1,43 @@
+@model TaskFlow.Models.TarefaViewModel
+
+<h2>Nova Tarefa</h2>
+
+<form method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descricao" class="form-label"></label>
+        <textarea asp-for="Descricao" class="form-control"></textarea>
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Prioridade" class="form-label"></label>
+
+        <select asp-for="Prioridade" class="form-select">
+            <option value="Baixa">Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+        </select>
+
+        <span asp-validation-for="Prioridade" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Criar tarefa
+    </button>
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

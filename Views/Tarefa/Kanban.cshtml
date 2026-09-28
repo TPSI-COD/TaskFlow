@@ -1,0 +1,334 @@
+@model List<TaskFlow.Models.Tarefa>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+<div>
+    <h2 class="mb-1">Meu Kanban</h2>
+
+    <p class="text-muted mb-0">
+        Organize suas tarefas por status.
+    </p>
+</div>
+
+<div class="d-flex gap-2">
+
+    <a asp-action="Index"
+       class="btn btn-outline-secondary">
+        Lista
+    </a>
+
+    <a asp-action="Dashboard"
+       class="btn btn-outline-info">
+        Dashboard
+    </a>
+
+    <a asp-action="Criar"
+       class="btn btn-primary">
+        + Nova Tarefa
+    </a>
+
+</div>
+
+
+</div>
+
+<div class="row g-4">
+
+
+<!-- Pendente -->
+
+<div class="col-md-4 coluna-kanban"
+     data-status="Pendente">
+
+    <div class="kanban-coluna">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h5 class="mb-0">
+                Pendente
+            </h5>
+
+            <span class="badge bg-secondary">
+                @Model.Count(t => t.Status == "Pendente")
+            </span>
+
+        </div>
+
+
+        <div class="kanban-area">
+
+            @foreach (var tarefa in Model.Where(t => t.Status == "Pendente"))
+            {
+                <div class="card mb-3 shadow-sm tarefa-card"
+                     draggable="true"
+                     data-id="@tarefa.Id">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title mb-2">
+                            @tarefa.Titulo
+                        </h5>
+
+                        @if (!string.IsNullOrEmpty(tarefa.Descricao))
+                        {
+                            <p class="card-text text-muted small">
+                                @tarefa.Descricao
+                            </p>
+                        }
+
+
+                        @if (tarefa.Prioridade == "Alta")
+                        {
+                            <span class="badge bg-danger">
+                                Alta
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Média")
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Média
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Baixa")
+                        {
+                            <span class="badge bg-secondary">
+                                Baixa
+                            </span>
+                        }
+
+
+                        <div class="mt-3">
+
+                            <a asp-action="AlterarStatus"
+                               asp-route-id="@tarefa.Id"
+                               asp-route-status="Em Andamento"
+                               class="btn btn-outline-warning btn-sm">
+                                Iniciar
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+            @if (!Model.Any(t => t.Status == "Pendente"))
+            {
+                <div class="text-muted small py-4 text-center">
+                    Nenhuma tarefa pendente.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Em Andamento -->
+
+<div class="col-md-4 coluna-kanban"
+     data-status="Em Andamento">
+
+    <div class="kanban-coluna">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h5 class="mb-0">
+                Em Andamento
+            </h5>
+
+            <span class="badge bg-warning text-dark">
+                @Model.Count(t => t.Status == "Em Andamento")
+            </span>
+
+        </div>
+
+
+        <div class="kanban-area">
+
+            @foreach (var tarefa in Model.Where(t => t.Status == "Em Andamento"))
+            {
+                <div class="card mb-3 shadow-sm tarefa-card"
+                     draggable="true"
+                     data-id="@tarefa.Id">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title mb-2">
+                            @tarefa.Titulo
+                        </h5>
+
+                        @if (!string.IsNullOrEmpty(tarefa.Descricao))
+                        {
+                            <p class="card-text text-muted small">
+                                @tarefa.Descricao
+                            </p>
+                        }
+
+
+                        @if (tarefa.Prioridade == "Alta")
+                        {
+                            <span class="badge bg-danger">
+                                Alta
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Média")
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Média
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Baixa")
+                        {
+                            <span class="badge bg-secondary">
+                                Baixa
+                            </span>
+                        }
+
+
+                        <div class="mt-3">
+
+                            <a asp-action="AlterarStatus"
+                               asp-route-id="@tarefa.Id"
+                               asp-route-status="Concluída"
+                               class="btn btn-outline-success btn-sm">
+                                Concluir
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+            @if (!Model.Any(t => t.Status == "Em Andamento"))
+            {
+                <div class="text-muted small py-4 text-center">
+                    Nenhuma tarefa em andamento.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Concluída -->
+
+<div class="col-md-4 coluna-kanban"
+     data-status="Concluída">
+
+    <div class="kanban-coluna">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h5 class="mb-0">
+                Concluída
+            </h5>
+
+            <span class="badge bg-success">
+                @Model.Count(t => t.Status == "Concluída")
+            </span>
+
+        </div>
+
+
+        <div class="kanban-area">
+
+            @foreach (var tarefa in Model.Where(t => t.Status == "Concluída"))
+            {
+                <div class="card mb-3 shadow-sm tarefa-card"
+                     draggable="true"
+                     data-id="@tarefa.Id">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title mb-2">
+                            @tarefa.Titulo
+                        </h5>
+
+                        @if (!string.IsNullOrEmpty(tarefa.Descricao))
+                        {
+                            <p class="card-text text-muted small">
+                                @tarefa.Descricao
+                            </p>
+                        }
+
+
+                        @if (tarefa.Prioridade == "Alta")
+                        {
+                            <span class="badge bg-danger">
+                                Alta
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Média")
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Média
+                            </span>
+                        }
+
+                        @if (tarefa.Prioridade == "Baixa")
+                        {
+                            <span class="badge bg-secondary">
+                                Baixa
+                            </span>
+                        }
+
+
+                        <div class="mt-3">
+
+                            <a asp-action="AlterarStatus"
+                               asp-route-id="@tarefa.Id"
+                               asp-route-status="Pendente"
+                               class="btn btn-outline-secondary btn-sm">
+                                Reabrir
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+            @if (!Model.Any(t => t.Status == "Concluída"))
+            {
+                <div class="text-muted small py-4 text-center">
+                    Nenhuma tarefa concluída.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+@section Scripts {
+
+
+<script src="~/js/kanban.js"></script>
+
+
+}
